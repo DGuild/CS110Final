@@ -1,0 +1,29 @@
+public class Card{
+
+	public enum Suit{
+		CLUB = "Club";
+		DIAMOND = "Diamond";
+		HEART = "Heart";
+		SPADES = "Spades";
+
+	}
+	private int rank;
+	private Suit suit;
+
+	public Card(int rank, Suit suit){
+		this.rank = rank;
+		this.suit = suit;
+	}
+
+	public void setRank(int r){;}
+	public void setSuit(Suit s){;}
+
+	public int getRank(){
+		return this.rank;
+	}
+
+	public Suit getSuit(){
+		return this.suit;
+	}
+
+}
