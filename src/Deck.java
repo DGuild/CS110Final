@@ -19,6 +19,7 @@ public class Deck{
             cards.add(c);
          }
       }
+      this.size = 52;
       
    }
    
@@ -41,12 +42,15 @@ public class Deck{
    
    public void addCard(Card c){
       cards.add(c);
+      this.size++;
    }
    
    public Card removeCard(){
       Card card = cards.get(0);
       cards.remove(0);
+      this.size--;
       return card;
+      
    }
    
    public int getSize(){
