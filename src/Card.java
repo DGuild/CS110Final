@@ -1,12 +1,4 @@
 public class Card{
-
-	public enum Suit{
-		CLUB,
-		DIAMOND,
-		HEART,
-		SPADES 
-
-	}
 	private int rank;
 	private Suit suit;
 

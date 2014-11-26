@@ -2,8 +2,8 @@ public class CardTest{
 	
 	public static void main(String[] args){
 
-		Card c1 = new Card(1, HEART);
-		Card c2 = new Card(10, SPADES);
+		Card c1 = new Card(1, Suit.HEART);
+		Card c2 = new Card(10, Suit.SPADES);
 
 		System.out.println(c1.getRank());
 		System.out.println(c1.getSuit());
