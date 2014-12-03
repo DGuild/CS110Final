@@ -1,23 +1,33 @@
 public class Player{
 
    private String name;
-   private Deck playerDeck;
-   private Deck discardPile;
+   private Hand playerDeck;
+   private DiscardPile discardPile;
    
    public Player(String name){
-      this.name = name;
+      setName(name);
+      this.playerDeck = new Hand();
+      this.discardPile = new DiscardPile();
    }
    
    public String getName(){
       return this.name;
+   }
+   
+   public Hand getHand(){
+      return playerDeck;
+   }
+   
+   public DiscardPile getDiscardPile(){
+      return discardPile;
    }
 
    public void setName(String name){
       this.name = name;
    }
    
-   public void setDeck(Deck d){
-      this.playerDeck = d;
+   public void setHand(Deck d){
+      this.playerDeck = new Hand(d);
    }
    
    

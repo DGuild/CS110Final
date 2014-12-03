@@ -19,7 +19,6 @@ public class Deck{
             cards.add(c);
          }
       }
-      this.size = 52;
       
    }
    
@@ -32,7 +31,7 @@ public class Deck{
       //grab a random card and put it there
       for(int i = 0; i < max; i++){
          int index = rand.nextInt(max - i) + i;
-         Card c = cards.get(index - 1);
+         Card c = cards.get(index);//changes index-1 to just index
          temp = cards.get(i);
          cards.set(i, c);
          cards.set(index, temp);
@@ -42,13 +41,11 @@ public class Deck{
    
    public void addCard(Card c){
       cards.add(c);
-      this.size++;
    }
    
    public Card removeCard(){
       Card card = cards.get(0);
       cards.remove(0);
-      this.size--;
       return card;
       
    }
@@ -57,10 +54,28 @@ public class Deck{
       return cards.size();
    }
    
+   public ArrayList<Card> getCards(){
+      return cards;
+   }
+   
+   public void setCards(ArrayList<Card> c){
+      this.cards = c;
+   }
+   
+   public Card getCard(int i){
+      return cards.get(i);
+   }
+   
+   
    public void printDeck(){
       for(Card c: cards){
          System.out.print("" + c.getRank() + " " + c.getSuit());
       }
    }
+   
+   public boolean isEmpty(){
+      if(cards.size() == 0) return true;
+      return false;
+   }  
 
 }
