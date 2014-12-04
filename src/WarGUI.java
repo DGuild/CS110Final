@@ -8,6 +8,7 @@ public class WarGUI extends JFrame{
    private Game game;
    private Player player;
    private Player computer;
+   private String name;
    private JLabel j1;
    private JLabel j2;
    private JLabel j3;
@@ -42,7 +43,7 @@ public class WarGUI extends JFrame{
         this.getContentPane().add(j1);
         
         j2 = new JLabel("Welcome to War");
-        this.getContentPane().add(new JLabel("Welcome to War"));
+        this.getContentPane().add(j2);
         
         j3 = new JLabel();
         this.getContentPane().add(j3);
@@ -65,9 +66,11 @@ public class WarGUI extends JFrame{
         j8.addActionListener(new ButtonListener());
         this.getContentPane().add(j8);
         
-        
         JLabel j9 = new JLabel("Computer", SwingConstants.CENTER);
         this.getContentPane().add(j9);
+        
+        name = JOptionPane.showInputDialog("Enter Name:");
+        j7.setText(name);
    }
    
    private class ButtonListener implements ActionListener{
@@ -88,8 +91,7 @@ public class WarGUI extends JFrame{
             j4.setText(Integer.toString(player.getHand().getSize() + player.getDiscardPile().getSize()));
             j6.setText(Integer.toString(computer.getHand().getSize() + computer.getDiscardPile().getSize()));
             
-            //Pause the program so the player can see the cards
-            
+
             //Compare cards and move to appropriate pile
             if(playerCardsInPlay.get(0).getRank() > computerCardsInPlay.get(0).getRank()){
                //Give player the cards
@@ -99,10 +101,13 @@ public class WarGUI extends JFrame{
                for(Card c: computerCardsInPlay){
                   player.getDiscardPile().addCard(c);
                }
+               //Change Icons and text
+               j2.setText(name + " wins this round");
                j4.setText(Integer.toString(player.getHand().getSize() + player.getDiscardPile().getSize()));
                j6.setText(Integer.toString(computer.getHand().getSize() + computer.getDiscardPile().getSize()));
             }
             else if (playerCardsInPlay.get(0).getRank() < computerCardsInPlay.get(0).getRank()){
+               
                //Give computer the cards
                for(Card c: playerCardsInPlay){
                   computer.getDiscardPile().addCard(c);
@@ -110,6 +115,7 @@ public class WarGUI extends JFrame{
                for(Card c: computerCardsInPlay){
                   computer.getDiscardPile().addCard(c);
                }
+               j2.setText("Computer wins this round");
                j4.setText(Integer.toString(player.getHand().getSize() + player.getDiscardPile().getSize()));
                j6.setText(Integer.toString(computer.getHand().getSize() + computer.getDiscardPile().getSize()));
             }
@@ -142,6 +148,7 @@ public class WarGUI extends JFrame{
                      for(Card c: computerCardsInPlay){
                          player.getDiscardPile().addCard(c);
                       }
+                     j2.setText("There was a war!" + name + " won!");
                      j4.setText(Integer.toString(player.getHand().getSize() + player.getDiscardPile().getSize()));
                      j6.setText(Integer.toString(computer.getHand().getSize() + computer.getDiscardPile().getSize()));
                      //Update noWinner
@@ -154,6 +161,7 @@ public class WarGUI extends JFrame{
                      for(Card c: computerCardsInPlay){
                         computer.getDiscardPile().addCard(c);
                      }
+                     j2.setText("There was a war! Computer won!");
                      j4.setText(Integer.toString(player.getHand().getSize() + player.getDiscardPile().getSize()));
                      j6.setText(Integer.toString(computer.getHand().getSize() + computer.getDiscardPile().getSize()));
                      
