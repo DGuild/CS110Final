@@ -1,98 +1,72 @@
+/**
+* Represents a Game of War with two players, a Deck of cards, and a winner
+*/
 import java.util.Scanner;
 public class Game{
    private Player player;
    private Player computer;
    private Deck deck;
-   private int rounds;
    private Player winner;
    
+   /**
+   * Constructs a game given two Players and a Deck of cards
+   *@param p1 The human player
+   *@param p2 The computer player
+   *@param d The Deck
+   */
    public Game(Player p1, Player p2, Deck d){
       this.player = p1;
       this.computer = p2;
       this.deck = d;
    }
-  
-   public void playRound(){
-      
-      discardToHand();
-      Card playerCard = player.getHand().playCard();
-      Card computerCard = computer.getHand().playCard();
-      
-      //If players card is bigger, they get the cards
-      //If computers card is bigger, it gets the cards
-      //Otherwise, go to war
-      if(playerCard.getRank() > computerCard.getRank()){
-         player.getDiscardPile().addCard(playerCard);
-         player.getDiscardPile().addCard(computerCard);
-      } else if (playerCard.getRank() < computerCard.getRank()){
-         computer.getDiscardPile().addCard(playerCard);
-         computer.getDiscardPile().addCard(computerCard);
-      } else{
-         Player warWinner = war();//go to war
-         //allocate cards to winner
-         if (warWinner == player){
-            player.getDiscardPile().addCard(playerCard);
-            player.getDiscardPile().addCard(computerCard);
-         }
-         if (warWinner == computer){
-            computer.getDiscardPile().addCard(playerCard);
-            computer.getDiscardPile().addCard(computerCard);
-         }
-      }
-   }
    
-   public Player war(){
-      
-      System.out.println("You go to war!");
-      
-      discardToHand();//check if either discard pile needs to be shuffled into hand
-      Card firstPlayerCard = player.getHand().playCard();
-      Card firstComputerCard = computer.getHand().playCard();
-      discardToHand();//check if either discard pile needs to be shuffled into hand
-      Card secondPlayerCard = player.getHand().playCard();
-      Card secondComputerCard = computer.getHand().playCard();
-      
-      if(secondPlayerCard.getRank() > secondComputerCard.getRank()){
-         player.getDiscardPile().addCard(firstPlayerCard);
-         player.getDiscardPile().addCard(firstComputerCard);
-         player.getDiscardPile().addCard(secondPlayerCard);
-         player.getDiscardPile().addCard(secondComputerCard);
-         return player;
-      }
-      else if (secondPlayerCard.getRank() < secondComputerCard.getRank()){
-         computer.getDiscardPile().addCard(firstPlayerCard);
-         computer.getDiscardPile().addCard(firstComputerCard);
-         computer.getDiscardPile().addCard(secondPlayerCard);
-         computer.getDiscardPile().addCard(secondComputerCard);
-         return computer;
-      } 
-      else{
-         return war();
-      }
-   }
-   
+   /**
+   * Checks if the Game has a winner
+   @return True if there is a winner. False otherwise.
+   */
    public boolean hasWinner(){
       if(winner != null)
           return true;
       else return false;
    }
    
+   /**
+   * Returns the winner of the game
+   @return The Player that won the game
+   */
    public Player getWinner(){
       return winner;
    }
    
+   /**
+   * Returns the human Player
+   @return The human Player
+   */
    public Player getPlayer(){
       return this.player;
    }
    
+   /** 
+   * Returns the computer Player
+   * @return the computer Player
+   */
    public Player getComputer(){
       return this.computer;
    }
    
+   /**
+   * Returns the Game's deck
+   * @return the Deck
+   */
    public Deck getDeck(){
       return this.deck;
    }
    
+   /**
+   * Checks if either player is out of cards. If so, declares the other
+   * player the winner.
+   * @return The Player that won
+   */
    public void setWinner(){
       if(player.getHand().getSize() == 0 && player.getDiscardPile().getSize() == 0){
          winner = computer;
@@ -103,6 +77,12 @@ public class Game{
       }
    }
    
+   /**
+   * Evenly divides the Deck to the Hands of the two Players
+   * @param d The Game's Deck
+   * @param p1 The human Player
+   * @param p2 The computer Player
+   */
    public void cutDeck(Deck d, Player p1, Player p2){
       for(int i = 0; i < d.getSize()/2; i++){
          Card c = d.getCard(i);
@@ -114,6 +94,10 @@ public class Game{
       }
    }
    
+   /**
+   * If Hands are empty, Places the Cards in each Player's
+   * Hand from their Discard Piles
+   */
    public void discardToHand(){
       //if any hands are empty, shuffle discard pile and put it in hand
       if(player.getHand().isEmpty()){
