@@ -7,11 +7,10 @@ public class WarDriver{
       
          //Create the game and its components
          
-         Player player = new Player("");
+         Player player = new Player("Your Name");
          Player computer = new Player("Computer");
          Deck deck = new Deck(); //creates a 52 card deck
          Game game = new Game(player, computer, deck);
-         game.showGUI();
          System.out.println("Now playing war");
          
          //Create variables to access parts of game

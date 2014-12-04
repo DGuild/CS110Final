@@ -11,12 +11,8 @@ public class Game{
       this.computer = p2;
       this.deck = d;
    }
-   
-   public void showGUI(){
-      gui.createAndShowGUI();
-   }
   
-   public  void playRound(){
+   public void playRound(){
       
       discardToHand();
       Card playerCard = player.getHand().playCard();

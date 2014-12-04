@@ -1,5 +1,6 @@
 public class Card{
 	private int rank;
+   private String imgPath;
 	private Suit suit;
 
 	public Card(int rank, Suit suit){
@@ -8,6 +9,40 @@ public class Card{
 		else
 			this.rank = 1;
 		this.suit = suit;
+      
+      String r = "";
+      String s = "";
+      if( rank >= 2 && rank <= 10){
+         r = Integer.toString(rank);
+      }
+      else if(rank == 1){
+         r = "ace";
+      }
+      else if(rank == 11){
+         r = "jack";
+      }
+      else if(rank == 12){
+         r = "queen";
+      }
+      else if(rank == 13){
+         r = "king";
+      }
+      
+      if(suit == Suit.CLUB){
+         s = "c";
+      }
+      else if(suit == Suit.DIAMOND){
+         s = "d";
+      }
+      else if(suit == Suit.HEART){
+         s = "h";
+      }
+      else if(suit == Suit.SPADES){
+         s = "s";
+      }
+      
+      this.imgPath = ("../img\\" + r + s + ".jpg");
+      
 	}
 
 	public void setRank(int r){;}
@@ -20,6 +55,10 @@ public class Card{
 	public Suit getSuit(){
 		return this.suit;
 	}
+   
+   public String getImgPath(){
+      return imgPath;
+   }
 
 	public int compareTo(Card c){
 		if (this.getRank() > c.getRank())
